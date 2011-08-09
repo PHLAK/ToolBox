@@ -1,11 +1,5 @@
 <?php
 
-$toolBox = new ToolBox();
-$salt = $toolBox->makeSalt(16, true);
-
-echo '<pre>' . htmlentities($salt) . '</pre>';
-
-
 /**
  * ToolBox is a PHP class featuring miscellaneous useful functions.
  * 
