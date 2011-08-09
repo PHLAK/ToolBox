@@ -16,8 +16,8 @@ class ToolBox {
      * Generate a random string of characters with a specified length and complexity.
      * 
      * @param int $length Length of desired salt
-     * @param boolean $strict If true, no character will be repeated
-     * @param string array $charset A string of characters to be used in generating the salt
+     * @param bool $strict If true, no character will be repeated
+     * @param string|array $charset A string of characters to be used in generating the salt
      * @return string String of specified length and complexity
      * @access public
      */
