@@ -17,7 +17,8 @@ class ToolBox {
      * 
      * @param int $length Length of desired salt
      * @param bool $strict If true, no character will be repeated
-     * @param string|array $charset A string of characters to be used in generating the salt
+     * @param string|array $charset A string of characters to be used in generating the salt or an
+     *                              array of pre-defined sets (lower, upper, num, special, extra)
      * @return string String of specified length and complexity
      * @access public
      */
@@ -29,27 +30,28 @@ class ToolBox {
             
             // Create empty string
             $chars = NULL;
-            
-            if ( isset($charset['alpha']) ) {
-                $chars .= 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            } else {
-                if ( isset($charset['lower']) ) {
-                $chars .= 'abcdefghijklmnopqrstuvwxyz';
-                }
-            
-                if ( isset($charset['upper']) ) {
-                    $chars .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                }
+
+            // Lower case alpha characters
+            if ( isset($charset['lower']) ) {
+            $chars .= 'abcdefghijklmnopqrstuvwxyz';
             }
             
+            // Upper case alpha characters
+            if ( isset($charset['upper']) ) {
+                $chars .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            }
+            
+            // All numbers
             if ( isset($charset['num']) ) {
                 $chars .= '0123456789';
             }
             
+            // Special characters
             if ( isset($charset['special']) ) {
                 $chars .= '!@#$%^&*()-_=+.?';
             }
             
+            // Uncommon extra characters
             if ( isset($charset['extra']) ) {
                 $chars .= '{}[]<>:;/\|~';
             }
