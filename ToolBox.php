@@ -11,7 +11,6 @@
  */
 class ToolBox {
     
-    
     /**
      * Generate a random string of characters with a specified length and complexity.
      * 
@@ -27,7 +26,6 @@ class ToolBox {
         if (is_string($charset)) {
             $chars = $charset;
         } elseif (is_array($charset)) {
-            
             // Create empty string
             $chars = NULL;
 
@@ -55,7 +53,6 @@ class ToolBox {
             if ( isset($charset['extra']) ) {
                 $chars .= '{}[]<>:;/\|~';
             }
-            
         } else {
             // All possible characters
             $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+.?{}[]<>:;/\|~';
