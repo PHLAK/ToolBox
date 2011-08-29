@@ -22,16 +22,21 @@ class ToolBox {
      * @access public
      */
     public function makeSalt($length, $strict = false, $charset = NULL) {
+        
         // Define possible characters
         if (is_string($charset)) {
+            
+            // Set the characterset to the user defined string
             $chars = $charset;
+            
         } elseif (is_array($charset)) {
+            
             // Create empty string
             $chars = NULL;
 
             // Lower case alpha characters
             if ( isset($charset['lower']) ) {
-            $chars .= 'abcdefghijklmnopqrstuvwxyz';
+                $chars .= 'abcdefghijklmnopqrstuvwxyz';
             }
             
             // Upper case alpha characters
@@ -53,9 +58,12 @@ class ToolBox {
             if ( isset($charset['extra']) ) {
                 $chars .= '{}[]<>:;/\|~';
             }
+            
         } else {
+            
             // All possible characters
             $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+.?{}[]<>:;/\|~';
+            
         }
         
         // If strict is set and number of characters is less than desired length, die with error
@@ -69,6 +77,7 @@ class ToolBox {
         // Pick a random char and append it to $salt until string length == $length
         $i = 0;
         while ($i < $length) {
+            
             // Pick a random character from the pool of available chars
             $char = substr($chars, mt_rand(0, strlen($chars)-1), 1);
             
@@ -82,10 +91,12 @@ class ToolBox {
                 $salt = $salt.$char;
                 $i++;
             }
+            
         }
         
         // Return the salt
         return $salt;
+        
     }
     
 }

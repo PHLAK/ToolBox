@@ -11,5 +11,4 @@
     
     // Echo random salt
     echo '<pre>' . htmlentities($salt) . '</pre>';
-
     
