@@ -98,6 +98,19 @@ class ToolBox {
         return $salt;
         
     }
+
+    /**
+     * Return the users connecting IP address.
+     * 
+     * @return string Connecting IP address
+     * @access public
+     */
+    public function getRemoteAddress() {
+        
+        // Return the users connecting IP address
+        return $_SERVER['REMOTE_ADDR'];
+        
+    }
     
 }
 
