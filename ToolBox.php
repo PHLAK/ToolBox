@@ -23,6 +23,15 @@ class ToolBox {
      */
     public function makeSalt($length, $strict = false, $charset = NULL) {
         
+        // Define character sets
+        $lowerAlpha = 'abcdefghijklmnopqrstuvwxyz';
+        $upperAlpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numeric    = '0123456789';
+        $special    = '!@#$%^&*()-_=+.?';
+        $extra      = '{}[]<>:;/\|~';
+        
+        $allChars   = $lowerAlpha . $upperAlpha . $numeric . $special . $extra;
+        
         // Define possible characters
         if (is_string($charset)) {
             
@@ -36,33 +45,33 @@ class ToolBox {
 
             // Lower case alpha characters
             if ( isset($charset['lower']) ) {
-                $chars .= 'abcdefghijklmnopqrstuvwxyz';
+                $chars .= $lowerAlpha;
             }
             
             // Upper case alpha characters
             if ( isset($charset['upper']) ) {
-                $chars .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $chars .= $upperAlpha;
             }
             
             // All numbers
             if ( isset($charset['num']) ) {
-                $chars .= '0123456789';
+                $chars .= $numeric;
             }
             
             // Special characters
             if ( isset($charset['special']) ) {
-                $chars .= '!@#$%^&*()-_=+.?';
+                $chars .= $special;
             }
             
             // Uncommon extra characters
             if ( isset($charset['extra']) ) {
-                $chars .= '{}[]<>:;/\|~';
+                $chars .= $extra;
             }
             
         } else {
             
             // All possible characters
-            $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+.?{}[]<>:;/\|~';
+            $chars = $allChars;
             
         }
         
