@@ -21,7 +21,7 @@ class ToolBox {
      * @return string String of specified length and complexity
      * @access public
      */
-    public function makeSalt($length, $strict = false, $charset = NULL) {
+    public function getRandomString($length, $strict = false, $charset = NULL) {
         
         // Define character sets
         $lowerAlpha = 'abcdefghijklmnopqrstuvwxyz';
