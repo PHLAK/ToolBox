@@ -108,6 +108,80 @@ class ToolBox {
         
     }
 
+
+    /**
+     * Compares two path strings and returns the relative path from one to the other
+     * 
+     * @param string $fromPath Starting path
+     * @param string $toPath Ending path
+     * @return string $relativePath
+     * @access public
+     */
+    public function getRelativePath($fromPath, $toPath) {
+        
+        // Define the OS specific directory separator
+        if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+        
+        // Remove double slashes from path strings
+        $fromPath   = str_replace(DS . DS, DS, $fromPath);
+        $toPath     = str_replace(DS . DS, DS, $toPath);
+        
+        // Explode working dir and cache dir into arrays
+        $fromPathArray  = explode(DS, $fromPath);
+        $toPathArray    = explode(DS, $toPath);
+        
+        // Remove last fromPath array element if it's empty
+        $x = count($fromPathArray) - 1;
+        
+        if(!trim($fromPathArray[$x])) {
+            array_pop($fromPathArray);
+        }
+        
+        // Remove last toPath array element if it's empty
+        $x = count($toPathArray) - 1;
+        
+        if(!trim($toPathArray[$x])) {
+            array_pop($toPathArray);
+        }
+        
+        // Get largest array count
+        $arrayMax = max(count($fromPathArray), count($toPathArray));
+        
+        // Set some default variables
+        $diffArray  = array();
+        $samePath   = true;
+        $key        = 1;
+        
+        // Generate array of the path differences
+        while ($key <= $arrayMax) {
+            if (@$toPathArray[$key] !== @$fromPathArray[$key] || $samePath !== true) {
+                
+                // Prepend '..' for every level up that must be traversed
+                if (isset($fromPathArray[$key])) {
+                    array_unshift($diffArray, '..');
+                }
+                
+                // Append directory name for every directory that must be traversed  
+                if (isset($toPathArray[$key])) {
+                    $diffArray[] = $toPathArray[$key];
+                } 
+                
+                // Directory paths have diverged
+                $samePath = false;
+            }
+            
+            // Increment key
+            $key++;
+        }
+
+        // Set the relative thumbnail directory path
+        $relativePath = implode('/', $diffArray);
+        
+        // Return the relative path
+        return $relativePath;
+        
+    }
+
     /**
      * Return the users connecting IP address.
      * 
